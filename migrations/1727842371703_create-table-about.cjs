@@ -9,16 +9,24 @@ exports.shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 exports.up = (pgm) => {
-  pgm.createTable("events", {
+  pgm.createTable("about", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    title: {
+    aboutDescription: {
+      type: "TEXT",
+      notNull: true,
+    },
+    conference_id: {
       type: "VARCHAR(50)",
       notNull: true,
     },
-    image_url: {
+    where: {
+      type: "TEXT",
+      notNull: true,
+    },
+    who: {
       type: "TEXT",
       notNull: true,
     },
@@ -31,5 +39,5 @@ exports.up = (pgm) => {
  * @returns {Promise<void> | void}
  */
 exports.down = (pgm) => {
-  pgm.dropTable("events");
+  pgm.dropTable("about");
 };

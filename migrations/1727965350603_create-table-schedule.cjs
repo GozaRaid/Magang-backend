@@ -14,23 +14,19 @@ exports.up = (pgm) => {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    event_id: {
-      type: "VARCHAR(50)",
-      notNull: true,
-    },
-    event_day: {
+    eventday: {
       type: "DATE",
       notNull: true,
     },
-    start_time: {
+    timestart: {
       type: "TIME",
       notNull: true,
     },
-    end_time: {
+    timeend: {
       type: "TIME",
       notNull: true,
     },
-    event_name: {
+    sessiontitle: {
       type: "TEXT",
       notNull: true,
     },
@@ -39,12 +35,6 @@ exports.up = (pgm) => {
       notNull: false,
     },
   });
-
-  pgm.createConstraint(
-    "schedule",
-    "fk_schedule.event_id_events.id",
-    "FOREIGN KEY(event_id) REFERENCES events(id) ON DELETE CASCADE"
-  );
 };
 
 /**

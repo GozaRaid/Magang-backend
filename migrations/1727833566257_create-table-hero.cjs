@@ -9,26 +9,24 @@ exports.shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 exports.up = (pgm) => {
-  pgm.createTable("about_us", {
+  pgm.createTable("hero", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    event_id: {
-      type: "VARCHAR(50)",
+    title: {
+      type: "TEXT",
       notNull: true,
     },
-    description: {
+    city: {
+      type: "TEXT",
+      notNull: true,
+    },
+    image_url: {
       type: "TEXT",
       notNull: true,
     },
   });
-
-  pgm.addConstraint(
-    "about_us",
-    "fk_about_us.event_id_events.id",
-    "FOREIGN KEY(event_id) REFERENCES events(id) ON DELETE CASCADE"
-  );
 };
 
 /**
@@ -37,5 +35,5 @@ exports.up = (pgm) => {
  * @returns {Promise<void> | void}
  */
 exports.down = (pgm) => {
-  pgm.dropTable("about_us");
+  pgm.dropTable("hero");
 };
