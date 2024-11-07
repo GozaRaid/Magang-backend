@@ -13,6 +13,11 @@ const routes = (handler) => [
     handler: () => handler.getScheduleHandler(),
   },
   {
+    method: "GET",
+    path: "/schedule/date",
+    handler: () => handler.getScheduleByDateHandler(),
+  },
+  {
     method: "DELETE",
     path: "/schedule",
     handler: () => handler.deleteScheduleHandler(),

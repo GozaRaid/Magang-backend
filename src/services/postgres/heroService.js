@@ -16,7 +16,19 @@ class HeroService {
     };
     const result = await this._pool.query(query);
     if (!result.rows[0].id) {
-      throw new InvariantError("Failed to add hero");
+      throw new InvariantError("Failed to update hero");
+    }
+    return result.rows[0].id;
+  }
+
+  async addHeroTitleCity({ title, city, id }) {
+    const query = {
+      text: "UPDATE hero SET title = $1, city = $2 WHERE id = $3 RETURNING id",
+      values: [title, city, id],
+    };
+    const result = await this._pool.query(query);
+    if (!result.rows[0].id) {
+      throw new InvariantError("Failed to update hero");
     }
     return result.rows[0].id;
   }

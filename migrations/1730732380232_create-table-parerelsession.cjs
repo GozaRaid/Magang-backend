@@ -1,3 +1,5 @@
+const { date } = require("joi");
+
 /**
  * @type {import('node-pg-migrate').ColumnDefinitions | undefined}
  */
@@ -9,34 +11,22 @@ exports.shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 exports.up = (pgm) => {
-  pgm.createTable("schedule", {
+  pgm.createTable("pararelsession", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    eventday: {
+    date: {
       type: "DATE",
       notNull: true,
     },
-    timestart: {
-      type: "TIME",
-      notNull: true,
-    },
-    timeend: {
-      type: "TIME",
-      notNull: true,
-    },
-    sessiontitle: {
+    name: {
       type: "TEXT",
       notNull: true,
     },
-    performer_speaker: {
-      type: "TEXT",
-      notNull: false,
-    },
-    parallelSession: {
-      type: "TEXT",
-      notNull: false,
+    paper_group_id: {
+      type: "VARCHAR(50)",
+      notNull: true,
     },
   });
 };
@@ -47,5 +37,5 @@ exports.up = (pgm) => {
  * @returns {Promise<void> | void}
  */
 exports.down = (pgm) => {
-  pgm.dropTable("schedule");
+  pgm.dropTable("pararelsession");
 };

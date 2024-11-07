@@ -47,6 +47,11 @@ import location from "./api/location/index.js";
 import LocationValidator from "./validator/location/index.js";
 import LocationService from "./services/postgres/locationService.js";
 
+// pararel-sessions
+import pararelSession from "./api/pararelSession/index.js";
+import ParallelSessionValidator from "./validator/pararelSession/index.js";
+import PararelSessionService from "./services/postgres/pararelSessionService.js";
+
 // image storage
 import StorageService from "./services/storage/StorageService.js";
 
@@ -64,6 +69,7 @@ const init = async () => {
     path.resolve(__dirname, "api/speakers/file/images")
   );
   const locationService = new LocationService();
+  const pararelSessionService = new PararelSessionService();
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -154,6 +160,13 @@ const init = async () => {
       options: {
         locationService: locationService,
         validator: LocationValidator,
+      },
+    },
+    {
+      plugin: pararelSession,
+      options: {
+        pararelSessionService: pararelSessionService,
+        validator: ParallelSessionValidator,
       },
     },
   ]);

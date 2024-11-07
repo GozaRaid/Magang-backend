@@ -9,34 +9,32 @@ exports.shorthands = undefined;
  * @returns {Promise<void> | void}
  */
 exports.up = (pgm) => {
-  pgm.createTable("schedule", {
+  pgm.createType("paper_mode", ["Online", "Offline"]);
+
+  pgm.createTable("paper", {
     id: {
       type: "VARCHAR(50)",
       primaryKey: true,
     },
-    eventday: {
-      type: "DATE",
-      notNull: true,
-    },
-    timestart: {
-      type: "TIME",
-      notNull: true,
-    },
-    timeend: {
-      type: "TIME",
-      notNull: true,
-    },
-    sessiontitle: {
+    paperid: {
       type: "TEXT",
       notNull: true,
     },
-    performer_speaker: {
+    title: {
       type: "TEXT",
-      notNull: false,
+      notNull: true,
     },
-    parallelSession: {
+    authors: {
       type: "TEXT",
-      notNull: false,
+      notNull: true,
+    },
+    mode: {
+      type: "paper_mode",
+      notNull: true,
+    },
+    paper_group_id: {
+      type: "VARCHAR(50)",
+      notNull: true,
     },
   });
 };
@@ -47,5 +45,6 @@ exports.up = (pgm) => {
  * @returns {Promise<void> | void}
  */
 exports.down = (pgm) => {
-  pgm.dropTable("schedule");
+  pgm.dropTable("paper");
+  pgm.dropType("paper_mode");
 };

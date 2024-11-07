@@ -37,9 +37,17 @@ const routes = (handler) => [
     },
   },
   {
+    method: "PUT",
+    path: "/speakers/{id}",
+    handler: (request, h) => handler.putSpeakersByIdHandler(request, h),
+    options: {
+      auth: "icodsa_schedule_jwt",
+    },
+  },
+  {
     method: "DELETE",
-    path: "/speakers",
-    handler: () => handler.deleteSpeakersHandler(),
+    path: "/speakers/{id}",
+    handler: (request, h) => handler.deleteSpeakersByIdHandler(request, h),
     options: {
       auth: "icodsa_schedule_jwt",
     },

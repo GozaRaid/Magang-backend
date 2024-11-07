@@ -13,7 +13,8 @@ const SchedulePayloadSchema = Joi.array().items(
             .pattern(/^\d{2}:\d{2} (AM|PM)$/)
             .required(),
           title: Joi.string().required(),
-          speakers: Joi.string().required(),
+          speakers: Joi.string(),
+          parallelSession: Joi.string(),
         })
       )
       .required(),

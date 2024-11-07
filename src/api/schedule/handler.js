@@ -9,6 +9,7 @@ class ScheduleHandler {
 
   async postScheduleHandler(request, h) {
     const { schedule } = request.payload;
+    console.log(schedule);
     this._validator.validateSchedulePayload(schedule);
     await this._scheduleService.addSchedule({ schedule });
     const response = h
@@ -22,6 +23,14 @@ class ScheduleHandler {
 
   async getScheduleHandler() {
     const data = await this._scheduleService.getSchedule();
+    return {
+      status: "success",
+      data,
+    };
+  }
+
+  async getScheduleByDateHandler() {
+    const data = await this._scheduleService.getScheduleByDate();
     return {
       status: "success",
       data,

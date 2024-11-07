@@ -7,7 +7,7 @@ const HeroPayloadSchema = Joi.object({
 
 const HeroCoverSchema = Joi.object({
   "content-type": Joi.string()
-    .valid("image/jpeg", "image/png", "image/jpg", "image/gif")
+    .valid("image/jpeg", "image/png", "image/jpg")
     .required(),
 }).unknown();
 

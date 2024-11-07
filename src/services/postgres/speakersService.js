@@ -9,25 +9,22 @@ class SpeakersService {
     this._pool = new Pool();
   }
 
-  async addSpeakers({ speakers, image_url }) {
-    for (let i = 0; i < speakers.length; i++) {
-      const id = `speaker-${nanoid(16)}`;
-      const speaker = speakers[i];
-      const image = image_url[i];
-      const query = {
-        text: "INSERT INTO speakers (id, name, bio, image_url) VALUES($1, $2, $3, $4) RETURNING id",
-        values: [id, speaker.name, speaker.bio, image],
-      };
-      const result = await this._pool.query(query);
-      if (!result.rows[0].id) {
-        throw new InvariantError("Failed to add speaker");
-      }
+  async addSpeakers({ name, bio, image_url }) {
+    const id = `speaker-${nanoid(16)}`;
+    const query = {
+      text: "INSERT INTO speakers (id, name, bio, image_url) VALUES($1, $2, $3, $4) RETURNING id",
+      values: [id, name, bio, image_url],
+    };
+    const result = await this._pool.query(query);
+    if (!result.rows[0].id) {
+      throw new InvariantError("Failed to add speaker");
     }
+    return result.rows[0].id;
   }
 
   async getSpeakers() {
     const query = {
-      text: "SELECT * FROM speakers",
+      text: "SELECT id , name , bio, image_url as image FROM speakers",
     };
     const result = await this._pool.query(query);
 
@@ -37,11 +34,30 @@ class SpeakersService {
     return result.rows;
   }
 
-  async deleteSpeakers() {
+  async editSpeakersById({ id, name, bio }) {
     const query = {
-      text: "DELETE FROM speakers",
+      text: "UPDATE speakers SET name = $1, bio = $2 WHERE id = $3 RETURNING id",
+      values: [name, bio, id],
     };
-    await this._pool.query(query);
+    const result = await this._pool.query(query);
+    if (!result.rows.length) {
+      throw new NotFoundError("Speakers data not found");
+    }
+    return result.rows[0].id;
+  }
+
+  async deleteSpeakersById(id) {
+    const query = {
+      text: "DELETE FROM speakers WHERE id = $1 RETURNING image_url",
+      values: [id],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows.length) {
+      throw new NotFoundError("Speakers data not found");
+    }
+    return result.rows[0].image_url;
   }
 }
 
