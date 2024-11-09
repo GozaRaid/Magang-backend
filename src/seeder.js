@@ -509,15 +509,15 @@ export default class Seeder {
 (async () => {
   const seeder = new Seeder();
   try {
-    // await seeder.seedUser();
-    // await seeder.seedHero();
-    // await seeder.seedConference();
-    // await seeder.seedAbout();
+    await seeder.seedUser();
+    await seeder.seedHero();
+    await seeder.seedConference();
+    await seeder.seedAbout();
     await seeder.seedSchedule();
-    // await seeder.seedPaper();
-    // await seeder.seedPararelSessions();
-    // await seeder.seedSpeaker();
-    // await seeder.seedLocation();
+    await seeder.seedPaper();
+    await seeder.seedPararelSessions();
+    await seeder.seedSpeaker();
+    await seeder.seedLocation();
   } catch (error) {
     console.error("Error seeding:", error);
   } finally {
