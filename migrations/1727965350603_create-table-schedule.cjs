@@ -34,7 +34,7 @@ exports.up = (pgm) => {
       type: "TEXT",
       notNull: false,
     },
-    parallelSession: {
+    parallelsession: {
       type: "TEXT",
       notNull: false,
     },

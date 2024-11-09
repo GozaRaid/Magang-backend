@@ -14,7 +14,7 @@ const SchedulePayloadSchema = Joi.array().items(
             .required(),
           title: Joi.string().required(),
           speakers: Joi.string(),
-          parallelSession: Joi.string(),
+          parallelsession: Joi.string(),
         })
       )
       .required(),

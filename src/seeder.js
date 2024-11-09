@@ -101,7 +101,7 @@ export default class Seeder {
         timeend: "10:00:00",
         sessiontitle: "Registration",
         performer_speaker: "Event Staff",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-I1C2E7A3WZyPIS6i",
@@ -110,7 +110,7 @@ export default class Seeder {
         timeend: "11:00:00",
         sessiontitle: "Keynote",
         performer_speaker: "John Smith",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-50t6sL1ZNsaoKAFP",
@@ -119,7 +119,7 @@ export default class Seeder {
         timeend: "12:00:00",
         sessiontitle: "Panel Discussion",
         performer_speaker: "Alice Johnson, Michael Lee, Sarah Wilson",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-2e683uoX1qsvIkcz",
@@ -128,7 +128,7 @@ export default class Seeder {
         timeend: "13:00:00",
         sessiontitle: "Lunch Break",
         performer_speaker: "N/A",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-4nju7PB510t25_J5",
@@ -137,7 +137,7 @@ export default class Seeder {
         timeend: "14:30:00",
         sessiontitle: "Breakout Sessions",
         performer_speaker: "David Miller, Rachel Adams",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-noAAhPnpjbEX9grx",
@@ -146,7 +146,7 @@ export default class Seeder {
         timeend: "15:30:00",
         sessiontitle: "Product Showcase",
         performer_speaker: "Emily Turner, James Green",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-KzRSAXPHN_0hbpZO",
@@ -155,7 +155,7 @@ export default class Seeder {
         timeend: "16:30:00",
         sessiontitle: "Networking",
         performer_speaker: "N/A",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-zUxvdgrrATqD3ex1",
@@ -164,7 +164,7 @@ export default class Seeder {
         timeend: "14:00:00",
         sessiontitle: "Workshop",
         performer_speaker: "Lisa Thompson",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-GzETsWMZ1-VQfFyY",
@@ -173,7 +173,7 @@ export default class Seeder {
         timeend: "15:00:00",
         sessiontitle: "Panel Discussion",
         performer_speaker: "Robert Davis, Karen Foster",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-KjsY7KY8H6fzs37d",
@@ -182,7 +182,7 @@ export default class Seeder {
         timeend: "16:00:00",
         sessiontitle: "Tech Expo",
         performer_speaker: "Tom Harris",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
       {
         id: "schedule-bTKJ8jhMlkKwJTeh",
@@ -191,7 +191,7 @@ export default class Seeder {
         timeend: "17:00:00",
         sessiontitle: "Roundtable Discussion",
         performer_speaker: "Anna Clark, Peter Hall",
-        parallelSession: "N/A",
+        parallelsession: "N/A",
       },
     ];
 
@@ -206,7 +206,7 @@ export default class Seeder {
             schedule.timeend,
             schedule.sessiontitle,
             schedule.performer_speaker,
-            schedule.parallelSession,
+            schedule.parallelsession,
           ]
         );
       }

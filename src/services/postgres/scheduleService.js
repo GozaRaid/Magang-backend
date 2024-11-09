@@ -14,16 +14,16 @@ class ScheduleService {
     await this._pool.query("BEGIN");
     for (const day of schedule) {
       const { date, items } = day;
-      console.log(date);
+      // console.log(date);
 
       for (const item of items) {
         const id = `schedule-${nanoid(16)}`;
-        const { timestart, timeend, title, speakers, parallelSession } = item;
+        const { timestart, timeend, title, speakers, parallelsession } = item;
 
         const startTime = convertToTime(timestart);
         const endTime = convertToTime(timeend);
         const query = {
-          text: "INSERT INTO schedule (id, eventday, timeStart, timeEnd, sessionTitle, performer_speaker, parallelSession) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id",
+          text: "INSERT INTO schedule (id, eventday, timestart, timeend, sessiontitle, performer_speaker, parallelsession) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING id",
           values: [
             id,
             date,
@@ -31,7 +31,7 @@ class ScheduleService {
             endTime,
             title,
             speakers,
-            parallelSession,
+            parallelsession,
           ],
         };
 
@@ -53,7 +53,6 @@ class ScheduleService {
     if (!result.rows.length) {
       throw new NotFoundError("Schedule data not found");
     }
-    console.log(result.rows);
 
     const schedule = result.rows.reduce((acc, row) => {
       const newdate = new Date(row.eventday);
@@ -84,7 +83,7 @@ class ScheduleService {
         timeend: formatTime(end),
         title: row.sessiontitle,
         speakers: row.performer_speaker,
-        parallelSession: row.parallelsession,
+        parallelsession: row.parallelsession,
       });
 
       return acc;
