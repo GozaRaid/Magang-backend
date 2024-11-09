@@ -5,7 +5,13 @@ import bcrypt from "bcrypt";
 
 export default class Seeder {
   constructor() {
-    this._pool = new Pool();
+    this._pool = new Pool({
+      user: "developer",
+      host: "localhost",
+      database: "icodsa",
+      password: "supersecret",
+      port: 5432,
+    });
   }
 
   async seedUser() {
@@ -75,10 +81,13 @@ export default class Seeder {
     const who =
       "Assoc. Prof. Dr. Hoshang Kolivand\nAssoc Prof. Dr. Satria Mandala\nProf. Hui-Min David Wang\nProf. Dimitrios Georgakopoulos\nDr. Ahsan Morsed (Tutorial)";
 
-    await this._pool.query(
-      `INSERT INTO about (id, description, image_url, conference_id, where, who) VALUES ($1, $2, $3, $4, $5, $6)`,
-      [id, aboutDescription, conference_id, where, who]
-    );
+    await this._pool.query(`INSERT INTO about VALUES ($1, $2, $3, $4, $5)`, [
+      id,
+      aboutDescription,
+      conference_id,
+      where,
+      who,
+    ]);
 
     console.log("About seeded successfully.");
   }
@@ -92,7 +101,7 @@ export default class Seeder {
         timeend: "10:00:00",
         sessiontitle: "Registration",
         performer_speaker: "Event Staff",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-I1C2E7A3WZyPIS6i",
@@ -101,7 +110,7 @@ export default class Seeder {
         timeend: "11:00:00",
         sessiontitle: "Keynote",
         performer_speaker: "John Smith",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-50t6sL1ZNsaoKAFP",
@@ -110,7 +119,7 @@ export default class Seeder {
         timeend: "12:00:00",
         sessiontitle: "Panel Discussion",
         performer_speaker: "Alice Johnson, Michael Lee, Sarah Wilson",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-2e683uoX1qsvIkcz",
@@ -119,7 +128,7 @@ export default class Seeder {
         timeend: "13:00:00",
         sessiontitle: "Lunch Break",
         performer_speaker: "N/A",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-4nju7PB510t25_J5",
@@ -128,7 +137,7 @@ export default class Seeder {
         timeend: "14:30:00",
         sessiontitle: "Breakout Sessions",
         performer_speaker: "David Miller, Rachel Adams",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-noAAhPnpjbEX9grx",
@@ -137,7 +146,7 @@ export default class Seeder {
         timeend: "15:30:00",
         sessiontitle: "Product Showcase",
         performer_speaker: "Emily Turner, James Green",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-KzRSAXPHN_0hbpZO",
@@ -146,7 +155,7 @@ export default class Seeder {
         timeend: "16:30:00",
         sessiontitle: "Networking",
         performer_speaker: "N/A",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-zUxvdgrrATqD3ex1",
@@ -155,7 +164,7 @@ export default class Seeder {
         timeend: "14:00:00",
         sessiontitle: "Workshop",
         performer_speaker: "Lisa Thompson",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-GzETsWMZ1-VQfFyY",
@@ -164,7 +173,7 @@ export default class Seeder {
         timeend: "15:00:00",
         sessiontitle: "Panel Discussion",
         performer_speaker: "Robert Davis, Karen Foster",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-KjsY7KY8H6fzs37d",
@@ -173,7 +182,7 @@ export default class Seeder {
         timeend: "16:00:00",
         sessiontitle: "Tech Expo",
         performer_speaker: "Tom Harris",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
       {
         id: "schedule-bTKJ8jhMlkKwJTeh",
@@ -182,15 +191,14 @@ export default class Seeder {
         timeend: "17:00:00",
         sessiontitle: "Roundtable Discussion",
         performer_speaker: "Anna Clark, Peter Hall",
-        parallelsession: "-",
+        parallelSession: "N/A",
       },
     ];
 
     try {
       for (const schedule of scheduleData) {
         await this._pool.query(
-          `INSERT INTO schedule (id, eventday, timestart, timeend, sessiontitle, performer_speaker, parallelsession)
-           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          `INSERT INTO schedule VALUES ($1, $2, $3, $4, $5, $6, $7)`,
           [
             schedule.id,
             schedule.eventday,
@@ -198,7 +206,7 @@ export default class Seeder {
             schedule.timeend,
             schedule.sessiontitle,
             schedule.performer_speaker,
-            schedule.parallelsession,
+            schedule.parallelSession,
           ]
         );
       }
@@ -390,7 +398,7 @@ export default class Seeder {
     console.log("Papers seeded successfully.");
   }
 
-  async pararelSessions() {
+  async seedPararelSessions() {
     const parallelSessions = [
       {
         id: "parallel_session-95Vkh0Y0rkfz6pmk",
@@ -471,7 +479,7 @@ export default class Seeder {
 
     for (const speaker of speakers) {
       await this._pool.query(
-        `INSERT INTO speaker (id, name, bio, image_url) VALUES ($1, $2, $3, $4)`,
+        `INSERT INTO speakers (id, name, bio, image_url) VALUES ($1, $2, $3, $4)`,
         [speaker.id, speaker.name, speaker.bio, speaker.image_url]
       );
     }
@@ -488,6 +496,8 @@ export default class Seeder {
       `INSERT INTO location (id, map_url) VALUES ($1, $2)`,
       [id, map_url]
     );
+
+    console.log("Location seeded successfully.");
   }
 
   async destroy() {
@@ -499,7 +509,15 @@ export default class Seeder {
 (async () => {
   const seeder = new Seeder();
   try {
-    await seeder.seedHero();
+    // await seeder.seedUser();
+    // await seeder.seedHero();
+    // await seeder.seedConference();
+    // await seeder.seedAbout();
+    await seeder.seedSchedule();
+    // await seeder.seedPaper();
+    // await seeder.seedPararelSessions();
+    // await seeder.seedSpeaker();
+    // await seeder.seedLocation();
   } catch (error) {
     console.error("Error seeding:", error);
   } finally {

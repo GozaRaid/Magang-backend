@@ -9,7 +9,6 @@ class ScheduleHandler {
 
   async postScheduleHandler(request, h) {
     const { schedule } = request.payload;
-    console.log(schedule);
     this._validator.validateSchedulePayload(schedule);
     await this._scheduleService.addSchedule({ schedule });
     const response = h
