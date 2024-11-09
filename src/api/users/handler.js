@@ -14,7 +14,7 @@ class UsersHandler {
     await this._service.addUser({ username, password });
     const response = h.response({
       status: "success",
-      message: "User berhasil ditambahkan",
+      message: "User successfully registered",
     });
     response.code(201);
     return response;
