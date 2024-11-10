@@ -1,3 +1,4 @@
+import "dotenv/config";
 import pkg from "pg";
 const { Pool } = pkg;
 import { nanoid } from "nanoid";
@@ -6,11 +7,11 @@ import bcrypt from "bcrypt";
 export default class Seeder {
   constructor() {
     this._pool = new Pool({
-      user: "developer",
-      host: "localhost",
-      database: "icodsa",
-      password: "supersecret",
-      port: 5432,
+      user: process.env.PGUSER,
+      host: process.env.PGHOST,
+      database: process.env.PGDATABASE,
+      password: process.env.PGPASSWORD,
+      port: process.env.PGPORT,
     });
   }
 
